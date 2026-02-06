@@ -3,6 +3,13 @@ import multer from "multer";
 import path from "path";
 import fs from "fs";
 // PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
+// PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
 import { updateBackground, getBackground } from "../controllers/BackgroundController.js";
 const router = express.Router();
 
