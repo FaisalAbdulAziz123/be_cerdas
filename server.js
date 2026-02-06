@@ -14,8 +14,17 @@ import historyRoutes from "./routes/historyRoutes.js";
 
 const app = express();
 
-// Middleware
-app.use(cors());
+// ==========================================
+// ✅ PERBAIKAN CORS (PENTING!)
+// ==========================================
+// Kita izinkan semua origin ("*") supaya Frontend di Localhost
+// bisa akses Backend yang ada di Koyeb tanpa diblokir browser.
+app.use(cors({
+  origin: "*", 
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
+
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
@@ -38,7 +47,7 @@ app.use("/api/background", backgroundRoutes);
 app.use("/api/history", historyRoutes);
 
 // ==========================================
-// BAGIAN INI YANG WAJIB DIUBAH UNTUK KOYEB
+// CONFIG PORT UNTUK KOYEB
 // ==========================================
 const PORT = process.env.PORT || 5000;
 
