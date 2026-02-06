@@ -19,10 +19,10 @@ app.use(cors());
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
-// Static folder (aman untuk Vercel)
+// Static folder (Supaya gambar bisa diakses)
 app.use("/uploads", express.static("uploads"));
 
-// Root test
+// Root test (Untuk cek server nyala)
 app.get("/", (req, res) => {
   res.send("Server Aplikasi Statistik BPS Berjalan Normal! 🚀");
 });
@@ -37,6 +37,11 @@ app.use("/api", sekilasRoutes);
 app.use("/api/background", backgroundRoutes);
 app.use("/api/history", historyRoutes);
 
-// ⛔ JANGAN app.listen()
-// ✅ EXPORT LANGSUNG
-export default app;
+// ==========================================
+// BAGIAN INI YANG WAJIB DIUBAH UNTUK KOYEB
+// ==========================================
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`✅ Server berjalan di port ${PORT}`);
+});
