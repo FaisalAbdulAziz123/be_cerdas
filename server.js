@@ -15,18 +15,21 @@ import historyRoutes from "./routes/historyRoutes.js";
 const app = express();
 
 // ==========================================
-// ✅ PERBAIKAN CORS (PENTING!)
+// 1. PENGATURAN LIMIT DATA (WAJIB PALING ATAS)
 // ==========================================
-// Kita izinkan semua origin ("*") supaya Frontend di Localhost
-// bisa akses Backend yang ada di Koyeb tanpa diblokir browser.
+// Ini harus dipasang SEBELUM rute apa pun agar server 
+// tidak menolak paket data besar di awal koneksi.
+app.use(express.json({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb", parameterLimit: 50000 }));
+
+// ==========================================
+// 2. PERBAIKAN CORS (PENTING!)
+// ==========================================
 app.use(cors({
   origin: "*", 
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
-
-app.use(express.json({ limit: "50mb" }));
-app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 // Static folder (Supaya gambar bisa diakses)
 app.use("/uploads", express.static("uploads"));
@@ -36,7 +39,9 @@ app.get("/", (req, res) => {
   res.send("Server Aplikasi Statistik BPS Berjalan Normal! 🚀");
 });
 
-// Routes
+// ==========================================
+// 3. DAFTAR ROUTES
+// ==========================================
 app.use("/api/auth", authRoutes);
 app.use("/tema", temaRoutes);
 app.use("/kelompok", kelompokDataRoutes);
