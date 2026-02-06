@@ -1,19 +1,25 @@
 import mysql from "mysql2";
+import "dotenv/config";
 
-const db = mysql.createConnection({
+// GANTI createConnection MENJADI createPool
+const db = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
+  password: process.env.DB_PASSWORD, // Pastikan ini sesuai dengan nama di Koyeb (DB_PASSWORD atau DB_PASS)
   database: process.env.DB_NAME,
   port: process.env.DB_PORT || 3306,
-  connectTimeout: 10000,
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
 });
 
-db.connect((err) => {
+// Tes koneksi awal (opsional, tapi bagus untuk cek log)
+db.getConnection((err, connection) => {
   if (err) {
-    console.error("❌ Gagal konek ke database:", err.message);
+    console.error("❌ Database Error:", err.message);
   } else {
-    console.log("✅ Berhasil konek ke database");
+    console.log("✅ Database Connected (Pool Mode)");
+    connection.release(); // Penting: Lepas koneksi setelah dicek
   }
 });
 
