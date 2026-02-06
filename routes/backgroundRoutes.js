@@ -10,7 +10,7 @@ import fs from "fs";
 // PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
 // PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
 // PERHATIKAN: path '../controllers/backgroundController.js' harus sesuai nama file Anda
-import { updateBackground, getBackground } from "../controllers/BackgroundController.js";
+import { updateBackground, getBackground } from "../controllers/backgroundController.js";
 const router = express.Router();
 
 // --- AUTO-CREATE FOLDER UPLOADS ---
